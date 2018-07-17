@@ -1,0 +1,5 @@
+Rename whichever folder contains the training images to 'Sprites'
+
+Change the 'Importing Images' section in main.py to only take in that many images
+
+All images must be 256x256
