@@ -24,7 +24,7 @@ def noise(n):
 print("Importing Images...")
 
 Images = []
-for n in range(1, 595):
+for n in range(1, 721):
     temp1 = Image.open("Sprites/im ("+str(n)+").png")
                 
     temp = np.array(temp1.convert('RGB'), dtype='float32')
@@ -34,7 +34,7 @@ for n in range(1, 595):
     Images.append(np.flip(Images[-1], 1))
     
 from keras.layers import Conv2D, LeakyReLU, BatchNormalization, Dense, AveragePooling2D
-from keras.layers import Reshape, UpSampling2D, Activation, Dropout, Flatten
+from keras.layers import Reshape, UpSampling2D, Activation, Dropout, Flatten, Conv2DTranspose
 from keras.models import model_from_json, Sequential
 from keras.optimizers import Adam
     
@@ -52,7 +52,7 @@ class GAN(object):
         self.AM = None
         
         #Config
-        self.LR = 0.00015
+        self.LR = 0.0001
         self.steps = 1
         
     def discriminator(self):
@@ -108,7 +108,7 @@ class GAN(object):
         self.D.add(Flatten())
         
         #256
-        self.D.add(Dense(16))
+        self.D.add(Dense(128))
         self.D.add(LeakyReLU(0.2))
         
         self.D.add(Dense(1, activation = 'sigmoid'))
@@ -122,7 +122,11 @@ class GAN(object):
         
         self.G = Sequential()
         
-        self.G.add(Reshape(target_shape = [4, 4, 256], input_shape = [4096]))
+        self.G.add(Reshape(target_shape = [1, 1, 4096], input_shape = [4096]))
+        
+        #1x1x4096
+        self.G.add(Conv2DTranspose(filters = 512, kernel_size = 4))
+        self.G.add(Activation('relu'))
         
         #4x4x256
         self.G.add(Conv2D(filters = 256, kernel_size = 3, padding = 'same'))
@@ -338,17 +342,14 @@ class Model_GAN(object):
         
         x = Image.fromarray(np.uint8(c1*255))
         
-        x.save("Results_Earth/i"+str(num)+".png")
+        x.save("Results_Pokemon/i"+str(num)+".png")
         
         
 model = Model_GAN()
-model.GAN.steps = 999
-model.load(0)
 
 print("We're off! See you in a while!")
 
-
-while(model.GAN.steps < 300000):
+while(model.GAN.steps < 500000):
     
     print("\n\n\n\nRound " + str(model.GAN.steps) + ":")
     model.train()
