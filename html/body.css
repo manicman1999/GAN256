@@ -1,0 +1,24 @@
+.body-container {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+#type {
+    text-align: center;
+    font-size: 35px;
+    font-weight: 700;
+    min-height: 50px;
+}
+
+#c {
+    border: 1px solid black;
+    height: 512px;
+    width: 512px;
+}
+
+
+
+
+@media(max-width: 1000px) {
+    
+}

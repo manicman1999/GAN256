@@ -1,0 +1,67 @@
+<html>
+    <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115875327-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-115875327-1');
+    </script>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="body.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earth GAN</title>
+        
+        <!-- TF-JS -->
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.7"> </script>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="head-container">
+            <div id="title">
+                Matchue
+            </div>
+        </div>
+        <div class="body-container">
+            <div id="type">
+                Earth GAN
+            </div>
+            
+            <center>
+                <canvas id="c"></canvas>
+                <br><br>
+                Open Source Generative Adversarial Network, Code <a href="https://github.com/manicman1999/GAN256" style="color: black">Here</a>.
+            </center>
+            
+
+        </div>
+        <div class="sidebar-container">
+            <a href="https://matchue.ca/p/" class="button">Projects</a>
+            <a href="https://matchue.ca/r/" class="button">Ramblings</a>
+            <a href="https://matchue.ca/c/" class="button">Contact</a>
+        </div>
+    </div>
+
+    <script>
+        setTimeout(function() {
+            var sososo = document.getElementsByTagName("div");
+            for (s = 0; s < sososo.length; s++) {
+                if (
+                    sososo[s].innerHTML.substring(0, 12) == '<a title="00' ||
+                    sososo[s].innerHTML.substring(0, 12) == '<a title="Ho') sososo[s].innerHTML = "";
+            }
+        }, 10);
+    </script>
+    
+    <script src="dom.js"></script>
+    <script src="loadmodel.js"></script>
+    <script src="perform.js"></script>
+</body>
+</html>
